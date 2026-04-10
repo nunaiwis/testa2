@@ -3,151 +3,193 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>❤️ 给Tina的表白 ❤️</title>
+<title>❤️ 给 Tina 的告白 ❤️</title>
 
 <style>
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-
-body {
-    /* ✅ 背景全屏铺满（兼容手机） */
-    background: url('https://i.pinimg.com/1200x/bd/68/94/bd689499cff15b162c878abe1b346406.jpg') no-repeat center center;
-    background-size: cover;
-    background-attachment: scroll; /* 手机兼容 fixed 问题 */
-    color: white;
-    text-align: center;
-    overflow-x: hidden;
+html,body{
+    margin:0;
+    padding:0;
+    height:100%;
+    overflow:hidden;
     font-family: Arial;
 }
 
-/* 半透明遮罩，让文字更清晰 */
+/* 背景 */
+body{
+    background:url('https://i.pinimg.com/1200x/bd/68/94/bd689499cff15b162c878abe1b346406.jpg') center/cover no-repeat;
+    color:#fff;
+    text-align:center;
+}
+
+/* 暗层 */
 .overlay{
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.35);
-    z-index: 1;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    z-index:1;
 }
 
+/* 内容 */
 .container{
-    position: relative;
-    z-index: 2;
-    padding-top: 25vh;
+    position:relative;
+    z-index:2;
+    top:20vh;
+    padding:20px;
 }
 
-h1 {
-    font-size: 40px;
-    margin: 0;
+h1{
+    font-size:40px;
 }
 
-#text {
-    font-size: 22px;
-    margin-top: 20px;
-    padding: 0 20px;
+#text{
+    font-size:20px;
+    margin-top:15px;
 }
 
-#timer {
-    margin-top: 10px;
-    font-size: 18px;
-    color: pink;
+#timer{
+    margin-top:10px;
+    color:pink;
 }
 
-img {
-    width: 60%;
-    max-width: 250px;
-    border-radius: 15px;
-    margin-top: 20px;
+/* 图片 */
+img{
+    width:200px;
+    border-radius:15px;
+    margin-top:20px;
 }
 
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 0;
+/* 烟花 */
+canvas{
+    position:fixed;
+    inset:0;
+    z-index:0;
 }
 
-/* 📱 手机适配 */
-@media (max-width: 600px) {
-    h1 { font-size: 28px; }
-    #text { font-size: 18px; }
-    #timer { font-size: 16px; }
-    .container { padding-top: 30vh; }
+/* 爱心漂浮 */
+.heart{
+    position:fixed;
+    bottom:-20px;
+    color:pink;
+    font-size:20px;
+    animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+    from{transform:translateY(0);opacity:1;}
+    to{transform:translateY(-100vh);opacity:0;}
+}
+
+/* 播放按钮 */
+#btn{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:5;
+    padding:12px 20px;
+    border:none;
+    border-radius:20px;
+    background:#ff4d6d;
+    color:#fff;
+    font-size:16px;
 }
 </style>
 </head>
 
 <body>
-<canvas id="fireworks"></canvas>
+
+<canvas id="fire"></canvas>
 <div class="overlay"></div>
 
 <div class="container">
-<h1>❤️ I LOVE YOU ❤️</h1>
-<div id="text"></div>
-<div id="timer"></div>
+    <h1>❤️ I LOVE YOU ❤️</h1>
+    <div id="text"></div>
+    <div id="timer"></div>
 
-<img id="photo" src="https://i.pinimg.com/736x/fb/61/87/fb61877cf887d62dfc1555c5366a1e1d.jpg" />
+    <img src="https://i.pinimg.com/736x/fb/61/87/fb61877cf887d62dfc1555c5366a1e1d.jpg">
 </div>
 
-<audio id="music" loop autoplay>
-  <source src="https://m701.music.126.net/20260410130302/c222f70ee9038bd77fa335b59ad5b6f3/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/14096438529/92de/8142/eace/c573c88c7367b49cc97bce941b1587c7.mp3?vuutv=XsFwVoHd15ShQ/2+DQPGamlH0oUZ3Idh+M3j0aPCDXJoD9Ipu0TbKo7fVwxOYybiBW28DeMgt1R/o7uMjhVhHCwPyAa0QgE0NPFMVlZaHi/yOh3aGNVCoev+VuCWN5q7OAw0TAd74VGTOI6kJ1szrJcBqG6aTwzJ8ylTYTuVOMRJ2s2Thy2l7wJhmU947jlmOI2s/0mbPaHVkcu8QDl7lWc1DbwC513R/qJMYCmEompCCMAt1boMC9P7uy3vhkAISRqFg/V2oKjZDekuA2yHA9Hg/IOdjiO+HrWRDfYZkPR5dQ571clhJ4zeRCMWyZ3cJ4Hm3UNaDTeMYfnFXKDZRDyz70hEcPodVJwyR4ibzBE=&cdntag=bWFyaz1vc193ZWIscXVhbGl0eV9zdGFuZGFyZA">
+<!-- 音乐 -->
+<audio id="music" loop preload="auto">
+    <source id="musicSource" src="music.mp3">
 </audio>
 
+<button id="btn" onclick="startAll()">🎵 点击进入浪漫模式</button>
+
 <script>
-// ===== 打字机效果 =====
-const msg = "Tina，从遇见你的那天开始，我的世界就变了 ❤️ 做我女朋友好吗？";
-let i = 0;
+/* ========= 打字机 ========= */
+const msg="Tina，从遇见你的那一刻起，我的世界只剩你 ❤️";
+let i=0;
 function typing(){
-    if(i < msg.length){
-        document.getElementById("text").innerHTML += msg.charAt(i);
-        i++;
-        setTimeout(typing, 100);
+    if(i<msg.length){
+        document.getElementById("text").innerHTML+=msg[i++];
+        setTimeout(typing,80);
     }
 }
 typing();
 
-// ===== 恋爱计时 =====
-const start = new Date("2026-02-12");
+/* ========= 计时 ========= */
+const start=new Date("2026-02-12");
 setInterval(()=>{
-    let now = new Date();
-    let diff = now - start;
-    let d = Math.floor(diff/1000/60/60/24);
-    document.getElementById("timer").innerHTML = "我们已经相遇 " + d + " 天 ❤️";
+    let d=Math.floor((Date.now()-start)/86400000);
+    document.getElementById("timer").innerHTML="我们已经相遇 "+d+" 天 ❤️";
 },1000);
 
-// ===== 烟花适配屏幕 =====
-const canvas = document.getElementById('fireworks');
-const ctx = canvas.getContext('2d');
+/* ========= 烟花 ========= */
+const c=document.getElementById("fire");
+const ctx=c.getContext("2d");
+c.width=innerWidth;
+c.height=innerHeight;
 
-function resizeCanvas(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-function firework(){
-    let x = Math.random()*canvas.width;
-    let y = Math.random()*canvas.height/2;
-    for(let i=0;i<50;i++){
-        ctx.fillStyle = 'hsl('+Math.random()*360+',100%,50%)';
+function fire(){
+    let x=Math.random()*c.width;
+    let y=Math.random()*c.height/2;
+    for(let i=0;i<60;i++){
+        ctx.fillStyle=`hsl(${Math.random()*360},100%,60%)`;
         ctx.beginPath();
-        ctx.arc(x + Math.random()*50, y + Math.random()*50, 2, 0, Math.PI*2);
+        ctx.arc(x+Math.random()*60,y+Math.random()*60,2,0,Math.PI*2);
         ctx.fill();
     }
 }
+setInterval(()=>{ctx.clearRect(0,0,c.width,c.height);fire();},500);
 
-setInterval(()=>{
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    firework();
-},500);
+/* ========= 爱心雨 ========= */
+function heartRain(){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(3+Math.random()*3)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+}
+setInterval(heartRain,300);
 
-// ===== 手机点击播放音乐 =====
-document.body.addEventListener('click', ()=>{
-    document.getElementById('music').play();
+/* ========= 音乐核心（自动解锁） ========= */
+function startMusic(){
+    const music=document.getElementById("music");
+
+    // 尝试播放（浏览器限制必须由点击触发）
+    music.play().catch(()=>{});
+}
+
+/* ========= 全部启动 ========= */
+function startAll(){
+    startMusic();
+    document.getElementById("btn").style.display="none";
+}
+
+/* ========= 自动尝试播放 ========= */
+window.addEventListener("load",()=>{
+    const music=document.getElementById("music");
+    music.volume=0.8;
+
+    let tryPlay=setInterval(()=>{
+        music.play().then(()=>{
+            clearInterval(tryPlay);
+        }).catch(()=>{});
+    },1000);
 });
-
 </script>
 
 </body>
